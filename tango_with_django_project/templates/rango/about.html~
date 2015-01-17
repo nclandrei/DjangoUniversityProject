@@ -15,7 +15,6 @@
         <h1>Rango says...</h1>
         This is the about page! <strong>{{ boldmessage }}</strong><br />
         <a href="/rango/">Index</a><br />
-        <img src="{% static "profile_pic.png" %}" alt="My CV picture" /> <!-- New line -->
     </body>
 
 </html>
