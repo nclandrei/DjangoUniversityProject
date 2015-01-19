@@ -1,5 +1,3 @@
-{% extends "rango/base.html" %}
-
 {% block title %}Add a New Page to {{ category_name }}{% endblock %}
 
 {% block body_block %}

@@ -1,6 +1,7 @@
 {% block title %}Add a New Page to {{ category_name }}{% endblock %}
 
 {% block body_block %}
+{% if user.is_authenticated %}
 <div class="hero-unit">
     <h1>Add a Page</h1>
 
@@ -29,4 +30,9 @@
       {% endif %}
     </div>
 </div>
+{% else %}
+<div class="hero-unit">
+  <h1> You can not view this page! You have to login first! </h1>
+</div>
+{% endif %}
 {% endblock %}
