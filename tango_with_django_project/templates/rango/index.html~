@@ -17,6 +17,19 @@
        {% else %}
             <strong>There are no categories present.</strong>
        {% endif %}
+	    <br> <br> <br>
+	    <h2> Top 5 pages </h2>
+	    {% if pages %}
+	    <ul>
+	      {% for page in pages %}
+            <li><a href="{{ page.url}}">{{ page.title }}</a> - {{ page.category}} ({{ page.views }} view(s))</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <strong>No pages at present.</strong>
+        {% endif %}
+
+
 
     </body>
 </html>
