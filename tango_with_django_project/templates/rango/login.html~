@@ -7,10 +7,10 @@
 
     <body>
         <h1>Login to Rango</h1>
+	<form id="login_form" method="post" action="/rango/login/">
 	{% if bad_details %}
             <p><strong>Your username and/or password were incorrect!</strong></p>
 	{% endif %}
-        <form id="login_form" method="post" action="/rango/login/">
             {% csrf_token %}
             Username: <input type="text" name="username" value="" size="50" />
             <br />

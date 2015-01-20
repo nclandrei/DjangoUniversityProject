@@ -1,0 +1,7 @@
+{% extends 'rango/base.html' %}
+<!DOCTYPE html>
+{% block body_block %}
+{% if user.is_authenticated %}
+<center> <h1> You can see this as you are logged in! </center> </h1>
+{% endif %}
+{% endblock %}

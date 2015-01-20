@@ -1,3 +1,4 @@
+{% extends 'rango/base.html' %}
 <!DOCTYPE html>
 
 {% load static %} <!-- New line -->
@@ -11,12 +12,12 @@
       This tutorial has been put together by Andrei-Mihai Nicolae, ID: 2147392
       </h1> </center>
 
-    <body>
+    {% block body_block %}
         <h1>Rango says...</h1>
         This is the about page! <strong>{{ boldmessage }}</strong><br />
         <a href="/rango/">Index</a><br />
 	<br> <br> <br>
         <img src="{% static "profile_pic.png" %}" alt="Picture of myself" /> <!-- New line -->
-    </body>
+    {% endblock %}
 
 </html>

@@ -3,8 +3,8 @@
     <head>
         <title>Rango</title>
     </head>
-
-    <body>
+    {% block body_block %}
+        {% if user.is_authenticated %}
         <h1>Add a Category</h1>
 
         <form id="category_form" method="post" action="/rango/add_category/">
@@ -21,7 +21,10 @@
             {% endfor %}
 
             <input type="submit" name="submit" value="Create Category" />
+	 {% else %}
+	    <h1> Can not view this page! You have to log in! </h1>
+	 {% endif %}
         </form>
-    </body>
+    {% endblock %}
 
 </html>
