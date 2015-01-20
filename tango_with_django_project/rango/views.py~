@@ -10,6 +10,8 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from datetime import datetime
+
 
 def encode_url(str):
     return str.replace(' ', '_')
@@ -18,24 +20,32 @@ def decode_url(str):
     return str.replace('_', ' ')
 
 def index(request):
-    # Request the context of the request.
-    # The context contains information such as the client's machine details, for example.
     context = RequestContext(request)
 
-    # Construct a dictionary to pass to the template engine as its context.
-    # Note the key boldmessage is the same as {{ boldmessage }} in the template!
-    category_list = Category.objects.order_by('-likes')[:5]
+    category_list = Category.objects.all()
     context_dict = {'categories': category_list}
-    
+
     for category in category_list:
-        category.url = category.name.replace(' ', '_')
-    
+        category.url = encode_url(category.name)
+
     page_list = Page.objects.order_by('-views')[:5]
     context_dict['pages'] = page_list
 
-    # Return a rendered response to send to the client.
-    # We make use of the shortcut function to make our lives easier.
-    # Note that the first parameter is the template we wish to use.
+    if request.session.get('last_visit'):
+        # The session has a value for the last visit
+        last_visit_time = request.session.get('last_visit')
+        visits = request.session.get('visits', 0)
+
+        if (datetime.now() - datetime.strptime(last_visit_time[:-7], "%Y-%m-%d %H:%M:%S")).days > 0:
+            request.session['visits'] = visits + 1
+            request.session['last_visit'] = str(datetime.now())
+    else:
+        # The get returns None, and the session does not have a value for the last visit.
+        request.session['last_visit'] = str(datetime.now())
+        request.session['visits'] = 1
+    #### END NEW CODE ####
+
+    # Render and return the rendered response back to the user.
     return render_to_response('rango/index.html', context_dict, context)
 
 def about(request):
@@ -46,11 +56,15 @@ def about(request):
     # Construct a dictionary to pass to the template engine as its context.
     # Note the key boldmessage is the same as {{ boldmessage }} in the template!
     context_dict = {'boldmessage': "I am bold font from the context"}
+    
+    # If the visits session varible exists, take it and use it.
+    # If it doesn't, we haven't visited the site so set the count to zero.
+    count = request.session.get('visits', 0)
+    context_dict['visit_count'] = count
 
-    # Return a rendered response to send to the client.
-    # We make use of the shortcut function to make our lives easier.
-    # Note that the first parameter is the template we wish to use.
+    # remember to include the visit data
     return render_to_response('rango/about.html', context_dict, context)
+    
 
 def category(request, category_name_url):
     # Request our context from the request passed to us.
@@ -158,6 +172,9 @@ def add_page(request, category_name_url):
              context)
 
 def register(request):
+    if request.session.test_cookie_worked():
+        print ">>>> TEST COOKIE WORKED!"
+        request.session.delete_test_cookie()
     # Like before, get the request's context.
     context = RequestContext(request)
 
@@ -260,7 +277,7 @@ def user_login(request):
 @login_required
 def restricted(request):
     context = RequestContext(request)
-    return render_to_response('rango/index.html', context)
+    return render_to_response('rango/restricted.html', context)
 
 # Use the login_required() decorator to ensure only those logged in can access the view.
 @login_required
