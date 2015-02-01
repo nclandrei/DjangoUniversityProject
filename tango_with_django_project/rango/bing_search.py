@@ -64,6 +64,7 @@ def run_query(search_terms):
     # Return the list of results to the calling function.
     return results
 
+# Main function running the query
 def main():
     query = raw_input("Please enter a query: ")
     results = run_query(query)

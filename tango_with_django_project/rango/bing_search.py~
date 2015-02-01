@@ -65,20 +65,15 @@ def run_query(search_terms):
     return results
 
 def main():
-    # Query, get the results and create a variable to store rank.
     query = raw_input("Please enter a query: ")
     results = run_query(query)
     rank = 1
     
-    # Loop through our results.
     for result in results:
-        # Print details.
         print "Rank {0}".format(rank)
         print result['title']
         print result['link']
         print
-
-       # Increment our rank counter by 1.
         rank += 1
 
 if __name__ == '__main__':
