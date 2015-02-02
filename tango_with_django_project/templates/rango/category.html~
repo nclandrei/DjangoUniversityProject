@@ -7,6 +7,15 @@
     <h1>{{ category_name }}</h1>
 
 {% if category %}
+    <p>
+      <b id="like_count">{{ category.likes }}</b> people like this category
+
+      {% if user.is_authenticated %}
+      <button id ="likes" data-catid="{{category.id}}" class="btn btn-mini btn-primary" type="button">Like</button>
+      {% endif %}
+    </p>
+
+    <br/>
 
     <div id="pages">
     {% if pages %}
@@ -45,6 +54,7 @@
   
   <div class="container-fluid">
     {% if result_list %}
+    <!-- Display search results in an ordered list -->
     <ol>
       {% for result in result_list %}
       <li>
