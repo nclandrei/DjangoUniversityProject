@@ -1,24 +1,16 @@
-{% extends 'rango/base.html' %}
-<!DOCTYPE html>
+{% extends "rango/base.html" %}
 
 {% load static %} <!-- New line -->
 
-<html>
-
-    <head>
-        <title>Rango</title>
-    </head>
-    <center> <h1>
-      This tutorial has been put together by Andrei-Mihai Nicolae, ID: 2147392
-      </h1> </center>
+      <h1> <center> This tutorial has been put together by Andrei-Mihai Nicolae, ID: 2147392 </center> </h1>
+      
 
     {% block body_block %}
     <div class="hero-unit">
-        <h1>Rango says...</h1>
-        This is the about page! <strong>{{ boldmessage }}</strong><br />
-        <a href="/rango/">Index</a><br />
+            <h3> <center> This tutorial has been put together by Andrei-Mihai Nicolae, ID: 2147392 </center> </h3>
 	<br> <br> <br>
-        <img src="{% static "profile_pic.png" %}" alt="Picture of myself" /> <!-- New line -->
+	<center> You've visited the site on <strong>{{ visit_count }} occasion(s).</strong> </center><br/> <br>
+
+        <center> <img src="{% static "profile_pic.png" %}" alt="Picture of myself" /> <!-- New line --> </center>
 	</div>
     {% endblock %}
-</html>

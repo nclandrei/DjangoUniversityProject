@@ -26,11 +26,13 @@
                <ul class="nav pull-right">
                    {% if user.is_authenticated %}
                     <li class="navbar-text">Welcome, {{ user.username }}!</li>
+		    <li><a href="rango/profile/">Profile</a></li>
                     <li><a href="/rango/logout/">Logout</a></li>
                    {% else %}
                     <li><a href="/rango/register/">Register</a></li>
                     <li><a href="/rango/login/">Login</a></li>
                    {% endif %}
+		    <!-- <li><a href="/rango/search/">Search</a></li> -->
                </ul>
                <ul class="nav">
                    {% if user.is_authenticated %}
@@ -49,18 +51,41 @@
     <div class="row-fluid">
         <div class="span3">
             <div class="well sidebar-nav">
-                <!--- Empty for the timebeing -->
+                <ul class="nav nav-list">
+                    <li></li>
+                    <li></li>
+                    {% block navbar %}
+                    {% endblock %}
+                </ul>
+
+		<ul class="nav nav-list">
+		  <li class="nav-header">Find a Category</li>
+		  <form>
+		    <label></label>
+		    <li><input  class="search-query span10" type="text" name="suggestion" value="" id="suggestion" /></li>
+		    </form>
+		  </ul>
+
+        {% if cat_list %}
+		    <div id="cats">
+		          {% include 'rango/category_list.html' with cat_list=cat_list %}
+			      </div>
+		        {% endif %}
             </div>
             <!--/.well -->
+
         </div>
         <!--/span-->
         <div class="span9">
+
             {% block body_block %}
             {% endblock %}
+
         </div>
         <!--/span-->
     </div>
     <!--/row-->
+
 </div>
 <!--/.fluid-container-->
 

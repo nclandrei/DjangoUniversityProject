@@ -13,12 +13,12 @@
       </h1> </center>
 
     {% block body_block %}
+    <div class="hero-unit">
         <h1>Rango says...</h1>
         This is the about page! <strong>{{ boldmessage }}</strong><br />
         <a href="/rango/">Index</a><br />
 	<br> <br> <br>
         <img src="{% static "profile_pic.png" %}" alt="Picture of myself" /> <!-- New line -->
-	<strong> Visits count: {{ visit_count }} </strong> <br>
+	</div>
     {% endblock %}
-
 </html>
