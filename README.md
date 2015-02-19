@@ -1,1 +1,1 @@
-Tango With Django Project (Web App Development class, University of Glasgow)
+Rango application delopyed on pythonanywhere. Used Django, Python, HTML, CSS, JS, AJAX.
