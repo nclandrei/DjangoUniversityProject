@@ -4,6 +4,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from rango.models import Category
 from rango.models import Page
+from rango.models import UserProfile
 from rango.forms import CategoryForm
 from rango.forms import PageForm
 from rango.forms import UserForm, UserProfileForm
