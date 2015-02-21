@@ -4,7 +4,7 @@ from registration.backends.simple.views import RegistrationView
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
-admin.autodiscover()
+
 
 # Create a new class that redirects the user to the index page, if successful at logging
 class MyRegistrationView(RegistrationView):
