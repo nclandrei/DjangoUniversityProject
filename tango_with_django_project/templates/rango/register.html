@@ -1,46 +1,24 @@
-{% extends 'rango/base.html' %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Rango</title>
-    </head>
-
-    {% block body_block %}
-<div class="hero-unit">
+{%extends 'rango/base.html'%}
+{%load staticfiles%}
+{%block title%}Register{%endblock%}
+{%block body_block%}
     <h1>Register with Rango</h1>
-    <br />
+    {%if registered%}
+        <strong>Rango says: Thank you for registering </strong>
+        <a href="/">Return to the homepage</a><br />
+    {%else%}
+        <strong>Rango says: Register Here</strong>
 
-    <div class="container">
-        {% if registered %}
-        <p>Thank you for registering.</p>
+        <form id="user_form" method="post" action="/rango/register/" enctype="multipart/form-data">
 
-        <p><a href="/rango/login/">Login</a> when you are ready to rango.</p>
-        {% else %}
-        <form class="form-signin span8" id="user_form" method="post" action="/rango/register/"
-              enctype="multipart/form-data">
-            {% csrf_token %}
-            <h2 class="form-signin-heading">Sign up Here</h2>
-            <!-- Display each form here -->
 
-            {% for field in user_form.visible_fields %}
-            {{ field.errors }}
-            {{ field.help_text }}<br />
-            {{ field }}<br />
-            {% endfor %}
+            {%csrf_token%}
 
-            {% for field in profile_form.visible_fields %}
-            {{ field.errors }}
-            {{ field.help_text }}<br />
-            {{ field }}<br />
-            {% endfor %}
+            {{user_form.as_p}}
+            {{profile_form.as_p}}
 
-            <br />
-            <!-- Provide a button to click to submit the form. -->
-            <input class="btn btn-primary" type="submit" name="submit" value="Register"/>
+            <input type="submit" name="submit" value="Register"/>
+
         </form>
-        {% endif %}
-    </div>
-</div>
-{% endblock %}
-
-</html>
+    {%endif%}
+{%endblock%}

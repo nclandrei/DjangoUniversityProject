@@ -27,10 +27,10 @@
                    {% if user.is_authenticated %}
                     <li class="navbar-text">Welcome, {{ user.username }}!</li>
 		    <li><a href="/rango/profile/">Profile</a></li>
-                    <li><a href="/rango/logout/">Logout</a></li>
+                    <li><a href="{% url 'auth_logout' %}?next=/rango/">Logout</a></li>
                    {% else %}
-                    <li><a href="/rango/register/">Register</a></li>
-                    <li><a href="/rango/login/">Login</a></li>
+                    <li><a href="{% url 'registration_register' %}">Register</a></li>
+                    <li><a href="{% url 'auth_login' %}">Login</a></li>
                    {% endif %}
 		    <!-- <li><a href="/rango/search/">Search</a></li> -->
                </ul>

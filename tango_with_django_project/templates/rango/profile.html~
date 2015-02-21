@@ -15,9 +15,5 @@
 	         <img src="{{ userprofile.picture.url }}"  />
 		          {% endif %}
 		          {% endif %}
-		 <br>
-		 <br>
-		 <a href="/accounts/password/change" role="button" class="btn btn-success btn-large">Change Password!</a>
 </div>
-
 {% endblock %}
